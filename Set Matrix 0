@@ -1,0 +1,22 @@
+//Time Complexity:- O(n * m)
+//Space Complexity:- O(n + m)
+class Solution:
+    def setMatrixZeroes(self, mat):
+        rowLen = len(mat)
+        colLen = len(mat[0])
+        
+        row = [0] * rowLen
+        col = [0] * colLen
+        
+        for i in range(rowLen):
+            for j in range(colLen):
+                if mat[i][j] == 0:
+                    row[i] = 1
+                    col[j] = 1
+        
+        for i in range(rowLen):
+            for j in range(colLen):
+                if row[i] == 0 or col[j] == 0:
+                    mat[i][j] = 0
+        
+        return mat
