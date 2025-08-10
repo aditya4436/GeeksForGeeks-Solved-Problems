@@ -1,0 +1,25 @@
+class Solution:
+    def nextPermutation(self, arr):
+        dipIndex = -1
+        n = len(arr)
+
+        # range(start, end, step), start = from the position where iteration starts
+        # end = where the iteration ends, step = number steps we jump
+        for i in range(n - 2, -1, -1):
+            if arr[i] < arr[i + 1]:
+                dipIndex = i
+                break
+                
+        if dipIndex == -1:
+            arr.reverse()
+            return arr
+            
+        for i in range (n - 1, dipIndex, -1):
+            if arr[i] > arr[dipIndex]:
+                arr[i], arr[dipIndex] = arr[dipIndex], arr[i]
+                break
+                
+        arr[dipIndex + 1:] = reversed(arr[dipIndex + 1:])
+        
+        return arr
+        
