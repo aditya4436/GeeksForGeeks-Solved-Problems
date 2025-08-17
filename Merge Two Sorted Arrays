@@ -1,4 +1,6 @@
+//BETTER APPROACH
 //Time Complexity:- O(min(n, m)) + O(nlogn) + O(mlogm)
+// Space Complexity:- O(1)
 class Solution:
     def mergeArrays(self, a, b):
         n = len(a)
@@ -18,5 +20,42 @@ class Solution:
         b.sort()
         
         return a, b
+
+// OPTIMAL APPROACH
+// Time Complexity:- O(log(n + m)) * O(n + m)
+// Space Complexity:- O(1)
+class Solution:
+    def swapIfGreater(self, a, b, ind1, ind2):
+        if a[ind1] > b[ind2]:
+            a[ind1], b[ind2] = b[ind2], a[ind1]
+        
+    def mergeArrays(self, a, b):
+        n = len(a)
+        m = len(b)
+        gap = ((n + m ) // 2) + ((n + m ) % 2)
+        
+        while gap > 0:
+            left = 0
+            right = left + gap
+            
+            while(right < (n + m)):
+                if(left < n and right >= n):
+                    self.swapIfGreater(a, b, left, right - n)
+                elif left >= n:
+                    self.swapIfGreater(b, b, left - n, right - n)
+                else:
+                    self.swapIfGreater(a, a, left, right)
+                
+                left += 1
+                right += 1
+        
+            if gap == 1:
+                break
+        
+            gap = (gap // 2) + (gap % 2)
+        
+        return a, b
+        
+        
         
         
