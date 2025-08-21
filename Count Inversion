@@ -1,0 +1,46 @@
+# Time Complexity:- O(nlogn)
+# Space Complexity:- O(n)
+class Solution:
+    def merge(self, arr, low, mid, high):
+        count = 0
+        temp = []
+        left = low
+        right = mid + 1
+        
+        while left <= mid and right <= high:
+            if arr[left] <= arr[right]:
+                temp.append(arr[left])
+                left += 1
+            else: 
+                temp.append(arr[right])
+                count += (mid - left + 1)  # inversion count
+                right += 1
+
+        while left <= mid:
+            temp.append(arr[left])
+            left += 1
+       
+        while right <= high:
+            temp.append(arr[right])
+            right += 1 
+        
+        for i in range(len(temp)):
+            arr[low + i] = temp[i]
+            
+        return count
+        
+    def mergeSort(self, arr, low, high):
+        count = 0
+        
+        if low < high:
+            mid = (low + high) // 2
+            count += self.mergeSort(arr, low, mid)
+            count += self.mergeSort(arr, mid + 1, high)
+            count += self.merge(arr, low, mid, high)
+            
+        return count
+
+    def inversionCount(self, arr):
+        return self.mergeSort(arr, 0, len(arr) - 1)
+        
+        
