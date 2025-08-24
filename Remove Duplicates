@@ -1,0 +1,25 @@
+# Time Complexity:- O(n)
+# Space Complexity:- O(n)
+class Solution:
+    def removeDuplicates(self, arr):
+        idx = 0
+        n = len(arr)
+        result = [arr[0]]
+        
+        for i in range(1, n):
+            number = arr[i]
+            if number != result[-1]:
+                result.append(arr[i])
+                
+        return result
+--------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+Approach Explanation
+
+Keep a result array to store unique elements.
+
+Always compare current element arr[i] with the last added element (result[-1]).
+
+If different → append it.
+
+At the end, result contains only unique elements.
