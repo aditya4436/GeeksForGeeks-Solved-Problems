@@ -1,0 +1,15 @@
+# Time Complexity:- O(n)
+# Space Complexity:- O(n)
+# BETTER APPROACH
+class Solution:
+    def majorityElement(self, arr):
+        freq = {}
+        n = len(arr)
+        
+        for i in range(n):
+            freq[arr[i]] = freq.get(arr[i], 0) + 1
+            
+            if freq[arr[i]] > n // 2:
+                return arr[i]
+        
+        return -1
