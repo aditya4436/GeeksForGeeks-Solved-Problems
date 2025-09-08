@@ -1,0 +1,42 @@
+# Time Complexity:- O(n)
+# Space Complexity:- O(1), because we are using extra space to store the ans and not to solve the problem.
+
+class Solution:
+    def findMajority(self, arr):
+        n = len(arr)
+        count1, count2 = 0, 0
+        neg_inf = float('-inf') 
+        element1, element2 = neg_inf, neg_inf
+        ans = []
+        
+        for i in range(n):
+            if count1 == 0 and arr[i] != element2:
+                count1 = 1
+                element1 = arr[i]
+            elif count2 == 0 and arr[i] != element1:
+                count2 = 1
+                element2 = arr[i]
+            elif element1 == arr[i]:
+                count1 += 1
+            elif element2 == arr[i]:
+                count2 += 1
+            else:
+                count1 -= 1
+                count2 -= 1
+                
+        minimum = n // 3 + 1
+        count1 = 0
+        count2 = 0
+        for i in range(n):
+            if element1 == arr[i]:
+                count1 += 1
+            if element2 == arr[i]:
+                count2 += 1
+            
+        if count1 >= minimum:
+            ans.append(element1)
+        if count2 >= minimum:
+            ans.append(element2)
+        
+        ans.sort()   
+        return ans
